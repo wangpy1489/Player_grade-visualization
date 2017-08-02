@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Smoothed D3.js Radar Chart</title>
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <!-- D3.js -->
+    <script src="d3-3.5.17/d3.min.js" charset="utf-8"></script>
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 11px;
+            font-weight: 300;
+            fill: #242424;
+            text-align: center;
+            text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+            cursor: default;
+        }
+
+        .team{
+
+            font-size:50px;
+            font-weight: bold;
+            fill:#0000000;
+
+        }
+
+        .legend {
+            font-size:15px;
+            font-family: 'Raleway', sans-serif;
+            fill: #333333;
+        }
+
+        .tooltip {
+            fill: #333333;
+        }
+        .information{
+            fill: #000000;
+            stroke-width: 1;
+            font-size: 20px;
+            text-anchor: middle;  /* 文本水平居中 */
+
+        }
+        .title{
+            fill: #2c7dbc;
+            font-weight: bold;
+            stroke-width: 1;
+            font-size: 60px;
+            text-anchor: middle;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="radarChart"></div>
+<script src ="datafile.js"></script>
+<script src="radar.js"></script>
+<script>
+    //////////////////////////////////////////////////////////////
+    //////////////////////// Set-Up //////////////////////////////
+    //////////////////////////////////////////////////////////////
+
+    var margin = {top: -100, right:0, bottom: 300, left: 900},
+        width = Math.max(700, window.innerWidth - 10) - margin.left - margin.right,
+        height = Math.max(width, window.innerHeight - margin.top - margin.bottom - 50);
+
+    //////////////////////////////////////////////////////////////
+    ////////////////////////// Data //////////////////////////////
+    //////////////////////////////////////////////////////////////
+
+
+    var data = [
+        [
+            {axis:"进攻",value:0.22},
+            {axis:"意识",value:0.28},
+            {axis:"防守",value:0.29},
+            {axis:"技术",value:0.17},
+            {axis:"多面",value:0.22},
+           // {axis:"Large Screen",value:0.02},
+            //{axis:"Price Of Device",value:0.21},
+            //{axis:"To Be A Smartphone",value:0.50}
+        ]
+    ];
+    //////////////////////////////////////////////////////////////
+    //////////////////// Draw the Chart //////////////////////////
+    //////////////////////////////////////////////////////////////
+
+    var color = d3.scale.ordinal()
+        .range(["#CC333F","#EDC951","#00A0B0"]);
+
+    var radarChartOptions = {
+        w: width,
+        h: height,
+        margin: margin,
+        maxValue: 0.5,
+        levels: 5,
+        roundStrokes: true,
+        color: color
+    };
+    //Call function to draw the Radar chart
+    RadarChart(".radarChart", data, radarChartOptions);
+</script>
+</body>
+</html>
